@@ -1,0 +1,2 @@
+# JavaEESocialNetwork
+Simple Social Network
