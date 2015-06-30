@@ -1,4 +1,4 @@
-package net.simplesn;
+package net.simplesn.servlets;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,7 +14,6 @@ import java.io.PrintWriter;
 
 @WebServlet("/mainservlet")
 public class MainServlet extends HttpServlet {
-
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
