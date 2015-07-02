@@ -30,11 +30,11 @@ public class SignUpServlet extends HttpServlet {
 
         // if a user with the registration data doesn't exist, redirect him to login page
         if (dbSimulator.exist(potencialNewUser)){
-            request.getRequestDispatcher("signup.jsp").forward(request, response);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
         else {
             dbSimulator.getNewUsers().add(potencialNewUser);
-            request.getRequestDispatcher("signin.jsp").forward(request, response);
+            request.getRequestDispatcher("profile.jsp").forward(request, response);
         }
 
     }

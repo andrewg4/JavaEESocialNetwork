@@ -33,7 +33,7 @@ public class SignInServlet extends HttpServlet {
         }
         // redirect to login page
         else {
-            request.getRequestDispatcher("signin.jsp").forward(request, response);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
 

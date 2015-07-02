@@ -9,7 +9,7 @@
     <div class="layout-pos">
 
         <ul class="main-menu">
-            <li><a href="signup.jsp">Sign up</a></li>
+            <li><a href="index.jsp">Sign up</a></li>
             <li class="active"><a href="#">Sign in</a></li>
             <li><a href="#">3</a></li>
             <li><a href="#">4</a></li>
