@@ -1,6 +1,7 @@
 package net.simplesn.servlets;
 
 import net.simplesn.db.DbSimulator;
+import net.simplesn.vo.UserVo;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,8 +16,6 @@ import java.io.IOException;
 @WebServlet(name = "SignUpServlet", urlPatterns = {"signup"})
 public class SignUpServlet extends HttpServlet {
 
-    DbSimulator dbSimulator = new DbSimulator();
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
@@ -25,16 +24,15 @@ public class SignUpServlet extends HttpServlet {
         String password = request.getParameter("password");
         String email = request.getParameter("email");
 
-        // create new user and add him to the list of new users
-        DbSimulator potencialNewUser = new DbSimulator(name, password, email);
-
         // if a user with the registration data doesn't exist, redirect him to login page
-        if (dbSimulator.exist(potencialNewUser)){
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+        if (DbSimulator.getDB().isRegisteredUser(email, password)){
+            request.getRequestDispatcher("failuresignup.jsp").forward(request, response);
         }
+        // create new user and add him to the list of users
         else {
-            dbSimulator.getNewUsers().add(potencialNewUser);
-            request.getRequestDispatcher("profile.jsp").forward(request, response);
+            DbSimulator.getDB().getNewUsers().add(new UserVo(name, password, email));
+            response.setContentType("text/html;charset=UTF-8");
+            request.getRequestDispatcher("successregistration.jsp").forward(request, response);
         }
 
     }

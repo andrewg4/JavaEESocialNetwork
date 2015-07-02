@@ -1,5 +1,7 @@
 package net.simplesn.db;
 
+import net.simplesn.vo.UserVo;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,65 +10,29 @@ import java.util.List;
  */
 public class DbSimulator {
 
-    private String name;
-    private String password;
-    private String email;
+    private List<UserVo> newUsers = new ArrayList<>();
 
-    private List<DbSimulator> newUsers = new ArrayList<>();
+    private static DbSimulator dbSimulator = new DbSimulator();
 
-    // register a new user
-    public DbSimulator(String name, String password, String email) {
-        this.name = name;
-        this.password = password;
-        this.email = email;
-    }
-
-    // initialize authorisation data
-    public DbSimulator(String email, String password) {
-        this.email = email;
-        this.password = password;
+    public static DbSimulator getDB() {
+        return dbSimulator;
     }
 
     public DbSimulator() {
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public List<DbSimulator> getNewUsers() {
+    public List<UserVo> getNewUsers() {
         return newUsers;
     }
 
-    public boolean exist(DbSimulator dbSimulator) {
-        for (DbSimulator dbs : newUsers) {
-            if (dbs.getName().equals(dbSimulator.getName()) &&
-                    dbs.getEmail().equals(dbSimulator.getEmail()) &&
-                    dbs.getPassword().equals(dbSimulator.getPassword())) {
+    public boolean isRegisteredUser(String email, String password) {
+        for (UserVo dbs : newUsers) {
+            if (dbs.getEmail().equals(email) && dbs.getPassword().equals(password)) {
                 return true;
             }
         }
         return false;
     }
+
 
 }
