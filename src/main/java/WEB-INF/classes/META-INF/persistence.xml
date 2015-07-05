@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="SimpleSNdatasource" transaction-type="JTA">
+        <jta-data-source>java:jboss/datasources/simplesndatasource</jta-data-source>
+        <class>net.simplesn.db.MessagesEntity</class>
+        <class>net.simplesn.db.UserEntity</class>
+        <properties>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+</persistence>

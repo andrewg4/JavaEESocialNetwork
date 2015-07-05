@@ -10,7 +10,7 @@
     <div class="formlogo">
         <form class="edit" method="POST" action="signin">
             <input type="email" name="email" id="email-field" placeholder="E-mail" required>
-            <input type="password" name="password" id="password-field" placeholder="Password" required >
+            <input type="password" name="password" id="password-field" placeholder="Password" required>
             <input type="submit" value="Log In">
         </form>
     </div>

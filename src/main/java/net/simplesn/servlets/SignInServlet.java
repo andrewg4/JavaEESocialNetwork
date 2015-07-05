@@ -16,7 +16,6 @@ public class SignInServlet extends HttpServlet {
     //HttpSession & cookie lifetime = 24 * 60 * 60 = 86400 (24 hours)
     private static final int MAX_AGE = 86400;
 
-
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
