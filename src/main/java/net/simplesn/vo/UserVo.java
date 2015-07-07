@@ -14,20 +14,15 @@ public class UserVo {
     private String following;
     private byte[] avatar;
 
-    public UserVo(int idUser, String name, String password, String email, String friends) {
-        this.idUser = idUser;
+    public UserVo(String name, String password, String email, String friends, String subscribers, String following, byte[] avatar){
         this.name = name;
         this.password = password;
         this.email = email;
         this.friends = friends;
+        this.subscribers = subscribers;
+        this.following = following;
+        this.avatar = avatar;
     }
-
-    public UserVo(String name, String password, String email) {
-        this.name = name;
-        this.password = password;
-        this.email = email;
-    }
-
 
     public int getIdUser() {
         return idUser;

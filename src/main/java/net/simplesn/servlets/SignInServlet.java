@@ -1,7 +1,8 @@
 package net.simplesn.servlets;
 
-import net.simplesn.db.DbSimulator;
+import net.simplesn.bean.UserBean;
 
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -13,24 +14,21 @@ import java.io.IOException;
 @WebServlet(name = "SignInServlet", urlPatterns = {"signin"})
 public class SignInServlet extends HttpServlet {
 
+    @EJB
+    UserBean userBean;
+
     //HttpSession & cookie lifetime = 24 * 60 * 60 = 86400 (24 hours)
     private static final int MAX_AGE = 86400;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // initialize authorisation data
-        String testEmail = "Test@Email";
-        String testPassword = "TestPassword";
-
         //get request parameters for userID and password
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
         // check if user data is correct
-        if (testEmail.equals(email) && testPassword.equals(password) ||
-                // if user is already registered
-                DbSimulator.getDB().isRegisteredUser(email,password)) {
+        if (userBean.isRegisteredUser(email)){
 
             HttpSession session = request.getSession();
             session.setAttribute("email", email);
@@ -42,11 +40,12 @@ public class SignInServlet extends HttpServlet {
             Cookie user = new Cookie("email", email);
             user.setMaxAge(MAX_AGE);
             response.addCookie(user);
-            response.sendRedirect("profile.jsp");
+
+            response.sendRedirect("index.jsp");
         }
         // redirect to login page
         else {
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            request.getRequestDispatcher("signupin.jsp").forward(request, response);
         }
     }
 

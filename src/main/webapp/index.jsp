@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>friendstem.net</title>
@@ -10,28 +11,36 @@
     <div class="formlogo">
         <form class="edit" method="POST" action="signin">
             <input type="email" name="email" id="email-field" placeholder="E-mail" required>
-            <input type="password" name="password" id="password-field" placeholder="Password" required>
+            <input type="password" name="password" id="password-field" placeholder="Your name" required>
             <input type="submit" value="Log In">
         </form>
     </div>
 </header>
 
 <div class="formreg">
-    <p>Make you friend stem bigger!</p>
+    <div class="layout-pos">
+        <div class="content">
+            <h1>Congratulation!</h1>
 
-    <p>Get started - it's free.</p>
+            <%--<c:if test="${header.cookie != 'email'}">--%>
+                <%--<c:redirect url="signin"/>--%>
+            <%--</c:if>${requestScope.Error_Message}--%>
 
-    <form class="edit" method="POST" action="signup">
-        <label>Name <input type="text" name="name" placeholder="Your name" required></label><br/>
-        <label>Password <input type="password" name="password" placeholder="Password" required></label><br/>
-        <label>Email <input type="email" name="email" placeholder="E-mail" required></label><br/>
+            <%
+                //TODO: allow access only if session exists    jstl
+                if (session.getAttribute("email") == null) {
+                    response.sendRedirect("signupin.jsp");
+                }
+            %>
 
-        <p class="ok">By clicking Join now, you agree to friendstem's User Agreement, Privacy Policy, and Cookie
-            Policy</p>
-        <input class="sub" type="submit" value="Sign up"/>
-    </form>
+            <a href="getusers">Show all users</a>
+
+            <form action="signout" method="post">
+                <input type="submit" value="Logout">
+            </form>
+        </div>
+    </div>
 </div>
-
 <footer>
     Contacts
 </footer>

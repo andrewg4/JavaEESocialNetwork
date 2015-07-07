@@ -35,6 +35,6 @@ public class SignOutServlet extends HttpServlet {
             session.invalidate();
         }
         // redirect to login page
-        resp.sendRedirect("index.jsp");
+        resp.sendRedirect("signupin.jsp");
     }
 }
