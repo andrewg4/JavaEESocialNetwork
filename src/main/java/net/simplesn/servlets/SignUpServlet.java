@@ -34,7 +34,7 @@ public class SignUpServlet extends HttpServlet {
         }
         // create new user and add him to the list of users
         else {
-            userBean.add(new UserVo(name, password, email, null, null, null, null));
+            userBean.add(new UserVo(name, password, email, "", "", "", null));
             response.setContentType("text/html;charset=UTF-8");
             request.getRequestDispatcher("successregistration.jsp").forward(request, response);
         }

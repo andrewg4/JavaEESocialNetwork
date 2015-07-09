@@ -21,6 +21,7 @@ public class UserEntity implements Serializable {
 
     @Id
     @Column(name = "id_user")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getIdUser() {
         return idUser;
     }

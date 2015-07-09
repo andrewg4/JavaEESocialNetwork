@@ -1,6 +1,7 @@
 package net.simplesn.servlets;
 
 import net.simplesn.bean.UserBean;
+import net.simplesn.vo.UserVo;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -37,11 +38,14 @@ public class SignInServlet extends HttpServlet {
             session.setMaxInactiveInterval(MAX_AGE);
 
             //creating and setting cookie lifetime - expire in 24 hours
-            Cookie user = new Cookie("email", email);
-            user.setMaxAge(MAX_AGE);
-            response.addCookie(user);
+//            Cookie user = new Cookie("email", email);
+//            user.setMaxAge(MAX_AGE);
+//            response.addCookie(user);
 
-            response.sendRedirect("index.jsp");
+            UserVo myProfile = userBean.getProfileData(email);
+            request.setAttribute("profile", myProfile);
+
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
         // redirect to login page
         else {

@@ -26,6 +26,16 @@ public class GetUsersServlets extends HttpServlet {
         List<UserVo> listOfUsers = userBean.getAll();
         request.setAttribute("users", listOfUsers);
 
+        if (request.getParameter("hiddenValue") != null){
+            request.setAttribute("myEmail", request.getParameter("hiddenValue"));
+        }
+        else {
+            if (request.getParameter("myEmail") != null){
+                request.setAttribute("myEmail", request.getParameter("myEmail"));
+            }
+            String myEmail = request.getParameter("email");
+            request.setAttribute("myEmail", myEmail);
+        }
         request.getRequestDispatcher("users.jsp").forward(request, response);
     }
 

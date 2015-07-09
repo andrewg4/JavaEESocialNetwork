@@ -1,19 +1,20 @@
 package net.simplesn.db;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.io.Serializable;
+import java.sql.Timestamp;
 
 /**
  * Created by Andrew on 05.07.2015.
  */
 @Entity
 @Table(name = "messages", schema = "", catalog = "simplesndb")
-public class MessagesEntity {
+public class MessagesEntity implements Serializable {
     private int idMessage;
     private String from;
     private String to;
     private String message;
-    private Date datetime;
+    private Timestamp datetime;
 
     @Id
     @Column(name = "id_message")
@@ -24,6 +25,7 @@ public class MessagesEntity {
     public void setIdMessage(int idMessage) {
         this.idMessage = idMessage;
     }
+
 
     @Basic
     @Column(name = "from")
@@ -57,11 +59,11 @@ public class MessagesEntity {
 
     @Basic
     @Column(name = "datetime")
-    public Date getDatetime() {
+    public Timestamp getDatetime() {
         return datetime;
     }
 
-    public void setDatetime(Date datetime) {
+    public void setDatetime(Timestamp datetime) {
         this.datetime = datetime;
     }
 
@@ -90,4 +92,5 @@ public class MessagesEntity {
         result = 31 * result + (datetime != null ? datetime.hashCode() : 0);
         return result;
     }
+
 }

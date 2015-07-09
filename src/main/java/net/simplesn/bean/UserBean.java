@@ -56,6 +56,15 @@ public class UserBean {
         userEntity.setAvatar(userVo.getAvatar());
         return userEntity;
     }
+    public UserVo get(int id) {
+        return toValueObj(userDao.find(id));
+    }
+
+    public void update(UserVo userVo) {
+        userDao.remove(userVo.getIdUser());
+        userVo.setIdUser(0);
+        userDao.persist(toEntity(userVo));
+    }
 
     public void add(UserVo userVo) {
         userDao.persist(toEntity(userVo));
@@ -72,5 +81,59 @@ public class UserBean {
         return false;
     }
 
+    public UserVo getProfileData(String email){
+        List<UserVo> listOfUsers = getAll();
+        for (UserVo dbUser : listOfUsers) {
+            if (dbUser.getEmail().equals(email)) {
+                return dbUser;
+            }
+        }
+        return null;
+    }
 
+    public void addToFriends(String myEmail, String uEmail){
+        UserVo me = getProfileData(myEmail);
+        UserVo userVo = getProfileData(uEmail);
+        // check if user is already follower
+        if (me.getFollowing().equals(uEmail) || userVo.getFollowing().equals(uEmail)){
+            me.setFriends(uEmail);
+            me.setFollowing("");
+            userVo.setFollowing("");
+            userVo.setFriends(myEmail);
+        }
+        else {
+            me.setFollowing(uEmail);
+            userVo.setSubscribers(myEmail);
+        }
+        update(me);
+        update(userVo);
+    }
+
+    public String getFriends(String myEmail){
+        List<UserVo> listOfUsers = getAll();
+        for (UserVo user : listOfUsers){
+            if (user.getEmail().equals(myEmail)){
+                return user.getFriends();
+            }
+        }
+        return null;
+    }
+
+    public String[] getListOfFriends(String myEmail){
+        return getFriends(myEmail).split(",");
+    }
+
+
+    public void unfollow(String myEmail, String uEmail) {
+        // update my profile
+        UserVo me = getProfileData(myEmail);
+        me.setFollowing("");
+
+        // update user profile
+        UserVo userVo = getProfileData(uEmail);
+        userVo.setSubscribers("");
+
+        update(me);
+        update(userVo);
+    }
 }

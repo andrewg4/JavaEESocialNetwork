@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Sign in to your account</title>
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/style-main.css">
 </head>
 <body>
 

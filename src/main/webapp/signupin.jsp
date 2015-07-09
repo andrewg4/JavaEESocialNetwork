@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>friendstem.net</title>
-  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="css/style-main.css">
 </head>
 <body>
 <div class="singupin">
@@ -31,7 +31,6 @@
       <input class="sub" type="submit" value="Sign up"/>
     </form>
   </div>
-
   <footer>
     Contacts
   </footer>
